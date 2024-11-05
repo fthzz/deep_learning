@@ -1,0 +1,20 @@
+第一步：解压yolov8的zip，然后在pycharm创建新项目。
+第二步：创建datasets的新目录，将文件夹bvn放到datasets里
+bvn中包括train/val
+train和val都包括一模一样的images和labels
+将一部分图片放入train 剩下的全部放入val
+第三步：创建对应的.yaml文件，改变其中数据，放到最外面
+第四部：终端执行训练指令
+ yolo task=detect mode=train model=models/v8/yolov8n.yaml data=/home/fthzzz/Desktop/ultralytics-robotdog/alarm.yaml pretrained=ultralytics/yolov8n.pt batch=4 epochs=800 lr0=0.01 resume=True
+ batch是将整个训练样本分成多少批
+ epochs是训练次数
+ workers是工人数量
+ lr0学习率
+ yolov8n.yaml权重文件 yolov8n-p2检测小目标
+ imgsz图片像素大小
+ conf置信度
+第五步：验证模型/验证val
+yolo task=detect mode=val model=runs/detect/train/weights/best.pt data=apple.yaml  batch=8 workers=2
+第六步：导出模型
+yolo task=detect mode=export model=runs/detect/train/weights/best.pt
+
